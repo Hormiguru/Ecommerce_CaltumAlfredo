@@ -1,13 +1,18 @@
 import React from 'react'
 
+// importamos lo de bt
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+// importamos el CartWidjet
+import CartWidget from '../CartWidget/CartWidget';
+
+
 export const NavBar = () => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" >
             <Container>
                 <Navbar.Brand href="#home">Pet & More</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,6 +33,7 @@ export const NavBar = () => {
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
+                <CartWidget />
             </Container>
         </Navbar>
     );
@@ -35,3 +41,4 @@ export const NavBar = () => {
 
 // Exportamos el NavBar
 export default NavBar;
+
