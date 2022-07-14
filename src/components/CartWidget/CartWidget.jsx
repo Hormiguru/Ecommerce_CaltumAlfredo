@@ -1,7 +1,7 @@
 import React from 'react'
 
 // importamos el logo del carrito
-import shopingCart from '../../img/Personalizado/shopping-cart.png'
+import shopingCart from '../../img/Cart/shopping-cart.png'
 
 
 // creamos el componente
