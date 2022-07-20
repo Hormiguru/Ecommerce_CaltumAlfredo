@@ -16,7 +16,7 @@ const Item = ({item}) => {
           <br/>
           Inventario: {stock} piezas
         </Card.Text>
-        <Button variant="primary">Detalles</Button>
+        <Button variant="primary" >Detalles</Button>
       </Card.Body>
     </Card>
   )
