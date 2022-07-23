@@ -4,12 +4,15 @@ import ItemDetailContainer from './containers/itemDetailContainer/itemDetailCont
 // importamos el navBar
 import NavBar from './components/NavBar/NavBar'
 
+import CartContext from './context/CardContext'
+
 // importamos de router-dome
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 function App() {
   return (
+
     <BrowserRouter>
       <div className="App">
         <NavBar />
