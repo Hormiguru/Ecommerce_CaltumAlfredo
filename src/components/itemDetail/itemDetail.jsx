@@ -6,8 +6,16 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getFetch } from '../../json/productos'
 
+import ItemCount from '../../components/ItemCount/ItemCount'
+
 function ItemDetail({dataDetalle}) {
 const [producto,setProducto]=useState(false)
+
+const onAdd= (count) =>{
+  alert(`Compraste ${count} piezas`);
+ }
+
+
 let{id}=useParams()
   useEffect(() => {
 
@@ -36,15 +44,12 @@ let{id}=useParams()
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Precio ${producto[0].price}</ListGroup.Item>
         <ListGroup.Item>inventario: {producto[0].stock} </ListGroup.Item>
+        <ItemCount initial={1} stock={producto[0].stock} onAdd={onAdd}/>
       </ListGroup>
-      {/* <Card.Body>
-        <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
-      </Card.Body> */}
     </Card>
     
     </div>
-    :"cargando"}
+    :""}
   </div>
   )
 }
