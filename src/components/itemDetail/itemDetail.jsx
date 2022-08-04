@@ -7,17 +7,22 @@ import { useParams, Link } from "react-router-dom";
 import { getFetch } from "../../json/productos";
 
 import ItemCount from "../../components/ItemCount/ItemCount";
+import { useCartContext } from "../../context/CartContext";
 
 function ItemDetail({ dataDetalle }) {
   const [producto, setProducto] = useState(false);
   const [isTrue,setIsTrue]=useState(true);
 
+const { agregarCarrito, cartList } = useCartContext()
+
+
   const onAdd = (count) => {
-    alert(`Compraste ${count} piezas`);
+    // alert(`Compraste ${count} piezas`);
     setIsTrue(false)
     console.log(setIsTrue)
+    agregarCarrito({...producto, cantidad:count})
   };
-  
+  console.log(cartList);
   let { id } = useParams();
   useEffect(() => {
     // getTask()
