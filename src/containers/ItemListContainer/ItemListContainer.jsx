@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 
 import ItemList from '../../components/ItemList/ItemList'
-import ItemDetail from '../../components/itemDetail/itemDetail'
 import { getFetch } from '../../json/productos'
 import { useParams } from 'react-router-dom'
 
@@ -13,7 +12,6 @@ export const ItemListContainer = ({greeting}) => {
   
   const[items,setItems] =useState([])
   const[loading,setLoading]=useState([true])
-  const [productos,setProductos]=useState([])
   const { categoriaId } =useParams()  
   
   useEffect(() => {
@@ -21,7 +19,7 @@ export const ItemListContainer = ({greeting}) => {
     if (categoriaId) {
       getFetch()
       // combierte productos en items
-      .then(res=>setItems(res.filter(producto=>producto.categoria==categoriaId)))
+      .then(res=>setItems(res.filter(producto=>producto.categoria===categoriaId)))
       .catch (error => console.log(error))
       .finally(() =>setLoading(false)) // se ejecuta siempre al final
     } else {
@@ -45,7 +43,6 @@ export const ItemListContainer = ({greeting}) => {
       {/* usamos la prop */}
       {greeting}
       <ItemList items={items}/>
-      <ItemDetail />
     </div>
   )
 }

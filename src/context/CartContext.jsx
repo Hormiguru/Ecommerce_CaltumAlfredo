@@ -1,5 +1,4 @@
-import { useContext, useState } from 'react';
-import { children, createContext } from 'react';
+import { useContext, useState,createContext } from 'react';
 
 export const CartContext = createContext([]);
 
@@ -14,11 +13,14 @@ const [cartList,setCartList] = useState([])
 
 // funcion que agrega los productos al carrito
 const agregarCarrito = (objProducto)=>{
-        setCartList([
-            ...cartList,
-            objProducto
-        ])
-}
+const index = cartList.findIndex(fI => fI.id === objProducto.id );
+    index<0?
+    setCartList([
+        ...cartList,
+        objProducto
+    ])
+    :cartList[index].cantidad =cartList[index].cantidad+objProducto.cantidad;
+} 
 
     return(
         <CartContext.Provider value={{
