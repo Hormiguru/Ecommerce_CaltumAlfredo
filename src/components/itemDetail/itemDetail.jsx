@@ -35,9 +35,15 @@ const { agregarCarrito } = useCartContext()
             </Card.Body>
             <ListGroup className="list-group-flush">
               {isTrue ? <ItemCount initial={1} stock={producto.stock} onAdd={onAdd} />:
+              <>
               <Link to={'/cart'}>
                 <button>Ir al Carrito</button>
-              </Link>}
+              </Link>
+              <Link to={'/'}>
+                <button>Seguir comprando</button>
+              </Link>
+              </>
+              }
               <ListGroup.Item>Precio ${producto.price}</ListGroup.Item>
               <ListGroup.Item>inventario: {producto.stock} </ListGroup.Item>
             </ListGroup>
