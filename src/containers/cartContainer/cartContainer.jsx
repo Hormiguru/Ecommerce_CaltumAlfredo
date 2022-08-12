@@ -5,9 +5,11 @@ import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 
 const CartContainer = () => {
-  const { cartList, limpiarCarrito, quitaProducto } = useCartContext();
+  const { cartList, limpiarCarrito, quitaProducto, piezasTotal } =
+    useCartContext();
   // suma todos los precios
-  const total = cartList.reduce(
+
+  const precioTotal = cartList.reduce(
     (acumulado, actual) => acumulado + actual.price * actual.cantidad,
     0
   );
@@ -42,7 +44,8 @@ const CartContainer = () => {
             </tr>
           ))}
           <tr>
-            <td>Precio Total ${total}</td>
+            <td>Precio Total ${precioTotal}</td>
+            <td>Cantidad Total {piezasTotal()}</td>
           </tr>
         </tbody>
       </Table>
