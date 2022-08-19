@@ -8,13 +8,22 @@ import { useCartContext } from "../../context/CartContext";
 const CartWidget = () => {
   const { piezasTotal } = useCartContext();
 
+  const mayo =
+    piezasTotal() > 1 ? (
+      <div>
+        {piezasTotal()}
+        <img src={"https://i.ibb.co/RYb2Dxw/shopping-cart.png"} />
+      </div>
+    ) : (
+      ""
+    );
   return (
     <div>
       {/* importado de un archivo */}
       {/* <img src={shopingCart} /> */}
       {/* importado desde web */}
-      <p>{piezasTotal()}</p>
-      <img src={"https://i.ibb.co/RYb2Dxw/shopping-cart.png"} />
+      {mayo}
+      {/* "{piezasTotal()} <img src={'https://i.ibb.co/RYb2Dxw/shopping-cart.png'} />" */}
     </div>
   );
 };
