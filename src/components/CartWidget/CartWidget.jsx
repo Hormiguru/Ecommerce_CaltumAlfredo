@@ -23,7 +23,6 @@ const CartWidget = () => {
       {/* <img src={shopingCart} /> */}
       {/* importado desde web */}
       {mayo}
-      {/* "{piezasTotal()} <img src={'https://i.ibb.co/RYb2Dxw/shopping-cart.png'} />" */}
     </div>
   );
 };

@@ -39,25 +39,6 @@ export const ItemListContainer = ({ greeting }) => {
       .finally(() => setLoading(false)); // se ejecuta siempre al final
   }, [categoriaId]);
 
-  console.log(categoriaId);
-
-  // useEffect(() => {
-  //   if (categoriaId) {
-  //     getFetch()
-  //       // combierte productos en items
-  //       .then((res) =>
-  //         setItems(res.filter((producto) => producto.categoria === categoriaId))
-  //       )
-  //       .catch((error) => console.log(error))
-  //       .finally(() => setLoading(false)); // se ejecuta siempre al final
-  //   } else {
-  //     getFetch()
-  //       // combierte productos en items
-  //       .then((res) => setItems(res))
-  //       .catch((error) => console.log(error))
-  //       .finally(() => setLoading(false)); // se ejecuta siempre al final
-  //   }
-  // }, [categoriaId]);
   /*Nota: Efectos despues del cierre de corchete:
     1. si no hay nada entre el corchete y el parentecis de cierre se repetira cada q se actualice
     2. si hay [] vacio se repite SOLO UNA VEZ
