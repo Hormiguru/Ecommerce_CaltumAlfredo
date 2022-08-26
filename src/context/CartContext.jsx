@@ -1,3 +1,13 @@
+import {
+  addDoc,
+  collection,
+  documentId,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+  writeBatch,
+} from "firebase/firestore";
 import { useContext, useState, createContext } from "react";
 
 export const CartContext = createContext([]);
@@ -40,6 +50,8 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const order = {};
+
   return (
     <CartContext.Provider
       value={{
@@ -48,6 +60,7 @@ const CartContextProvider = ({ children }) => {
         cartList,
         agregarCarrito,
         piezasTotal,
+        order,
       }}
     >
       {children}

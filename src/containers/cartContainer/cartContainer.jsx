@@ -15,10 +15,9 @@ import {
 } from "firebase/firestore";
 
 const CartContainer = () => {
-  const { cartList, limpiarCarrito, quitaProducto, piezasTotal } =
+  const { cartList, limpiarCarrito, quitaProducto, piezasTotal, order } =
     useCartContext();
   // suma todos los precios
-
   const precioTotal = cartList.reduce(
     (acumulado, actual) => acumulado + actual.price * actual.cantidad,
     0
@@ -28,7 +27,6 @@ const CartContainer = () => {
   const ordenCompra = async () => {
     console.log("generando orden");
     // generamos el objeto
-    const order = {};
     order.buyer = {
       name: "Alfredo",
       phone: "123456",
@@ -48,7 +46,8 @@ const CartContainer = () => {
     const querryOrders = collection(db, "orders");
     addDoc(querryOrders, order)
       .then((resp) => {
-        console.log(resp.id);
+        // console.log(resp.id);
+        order.id = resp.id;
       })
       .catch((error) => console.log(error));
 
@@ -82,6 +81,7 @@ const CartContainer = () => {
     // .finally(() => limpiarCarrito());
 
     batch.commit();
+    // console.log(order);
   };
 
   return cartList.length > 0 ? (
@@ -168,6 +168,7 @@ const CartContainer = () => {
             </form>
           </div>
           <button onClick={ordenCompra}>Generar Orden</button>
+          <div>{order.id}</div>
         </div>
       </div>
     </div>
