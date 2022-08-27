@@ -13,10 +13,12 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
+import { useEffect } from "react";
 
 const CartContainer = () => {
   const { cartList, limpiarCarrito, quitaProducto, piezasTotal, order } =
     useCartContext();
+
   // suma todos los precios
   const precioTotal = cartList.reduce(
     (acumulado, actual) => acumulado + actual.price * actual.cantidad,
@@ -46,8 +48,8 @@ const CartContainer = () => {
     const querryOrders = collection(db, "orders");
     addDoc(querryOrders, order)
       .then((resp) => {
-        // console.log(resp.id);
         order.id = resp.id;
+        console.log(order.id);
       })
       .catch((error) => console.log(error));
 
@@ -81,97 +83,99 @@ const CartContainer = () => {
     // .finally(() => limpiarCarrito());
 
     batch.commit();
-    // console.log(order);
   };
 
   return cartList.length > 0 ? (
-    <div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartList.map((producto) => (
-            <tr key={producto.id}>
-              <td>
-                <img src={producto.imagen} alt={producto.name} height="100" />
-              </td>
-              <td>{producto.name}</td>
-              <td>{producto.cantidad}</td>
-              <td>${producto.price}</td>
-              <td>${producto.cantidad * producto.price}</td>
-              <td>
-                <button onClick={() => quitaProducto(producto.id)}>
-                  Quitar del carrito
-                </button>
-              </td>
+    (console.log(order),
+    (
+      <div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
             </tr>
-          ))}
-          <tr>
-            <td>Precio Total ${precioTotal}</td>
-            <td>Cantidad Total {piezasTotal()}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <button onClick={limpiarCarrito}>Borrar el Carrito</button>
+          </thead>
+          <tbody>
+            {cartList.map((producto) => (
+              <tr key={producto.id}>
+                <td>
+                  <img src={producto.imagen} alt={producto.name} height="100" />
+                </td>
+                <td>{producto.name}</td>
+                <td>{producto.cantidad}</td>
+                <td>${producto.price}</td>
+                <td>${producto.cantidad * producto.price}</td>
+                <td>
+                  <button onClick={() => quitaProducto(producto.id)}>
+                    Quitar del carrito
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td>Precio Total ${precioTotal}</td>
+              <td>Cantidad Total {piezasTotal()}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <button onClick={limpiarCarrito}>Borrar el Carrito</button>
 
-      {/* // Formulario */}
-      <div className="row mt-5">
-        <div className="col mt-5">
+        {/* // Formulario */}
+        <div className="row mt-5">
           <div className="col mt-5">
-            <form
-              className="border border-2 border-primary rounded shadow-lg w-75 p-3"
-              style={{ margin: "auto" }}
-            >
-              <div className="form-group">
-                <label htmlFor="">Nombre</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="name"
-                  placeholder="Nombre"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="">Teléfono</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="phone"
-                  placeholder="Teléfono"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="">Email</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="email"
-                  placeholder="Email"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="">Validar Email</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="validarEmail"
-                  placeholder="Repita Email"
-                />
-              </div>
-            </form>
+            <div className="col mt-5">
+              <form
+                className="border border-2 border-primary rounded shadow-lg w-75 p-3"
+                style={{ margin: "auto" }}
+              >
+                <div className="form-group">
+                  <label htmlFor="">Nombre</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="">Teléfono</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    placeholder="Teléfono"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="">Validar Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="validarEmail"
+                    placeholder="Repita Email"
+                  />
+                </div>
+              </form>
+            </div>
+            <button onClick={() => ordenCompra()}>Generar Orden</button>
+            <div>{order.id}</div>
           </div>
-          <button onClick={ordenCompra}>Generar Orden</button>
-          <div>{order.id}</div>
         </div>
       </div>
-    </div>
+    ))
   ) : (
     <div>
       <div>Carrito Vacio</div>
